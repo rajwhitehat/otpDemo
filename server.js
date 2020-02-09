@@ -17,7 +17,7 @@ details is the sessionId
 
 
 app.post('/sendOtp', (req,res,next)=>{
-    request(`https://2factor.in/API/V1/de56ca2b-4b5f-11ea-9fa5-0200cd936042/SMS/${req.body.mobile}/AUTOGEN`, function (error, response, body) {
+    request(`https://2factor.in/API/V1/{API_KEY}/SMS/${req.body.mobile}/AUTOGEN`, function (error, response, body) {
         res.send(body, error, response)
       });
 })
@@ -30,7 +30,7 @@ Response will be like - {"Status":"Success","Details":"OTP Matched"}
 */
 
 app.post('/verifyOtp', (req,res,next)=>{
-    request(`https://2factor.in/API/V1/de56ca2b-4b5f-11ea-9fa5-0200cd936042/SMS/VERIFY/${req.body.sessionId}/${req.body.otp}`, function (error, response, body) {
+    request(`https://2factor.in/API/V1/{API_KEY}/SMS/VERIFY/${req.body.sessionId}/${req.body.otp}`, function (error, response, body) {
         res.send(body, error, response)
       });
 })
@@ -48,7 +48,7 @@ sms:
 const options = {
     url: 'https://api.msg91.com/api/v2/sendsms',
     "headers": {
-        "authkey": "317474A3nLNGLwn3Df5e400cdbP1",
+        "authkey": "auth_key",
         "content-type": "application/json"
       }
   };
@@ -61,7 +61,7 @@ app.post('/sendOtp', (req,res,next)=>{
           url: 'https://api.msg91.com/api/v2/sendsms',
           method: 'POST',
           headers: {
-            "authkey": "317474A3nLNGLwn3Df5e400cdbP1",
+            "authkey": "AUTH_KEY",
             "content-type": "application/json"
           },
           postData: {
@@ -95,7 +95,7 @@ app.post('/sendOtp', (req,res,next)=>{
 /*  Send OTP AAPI
 
 app.post('/sendOtp', (req,res,next)=>{
-    request(`http://api.msg91.com/api/sendotp.php?authkey=317474A3nLNGLwn3Df5e400cdbP1&mobile=918708242035&message=Your%20otp%20is%202786&otp=2786`, function (error, response, body) {
+    request(`http://api.msg91.com/api/sendotp.php?authkey=API_KEY&mobile=918708242035&message=Your%20otp%20is%202786&otp=2786`, function (error, response, body) {
         res.send(body)
       });
 })
